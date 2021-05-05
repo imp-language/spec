@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<!-- Built with spec-md https://spec-md.com -->
+<html>
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>Imp Language Specification</title>
+<style>/** * prism.js default theme for JavaScript, CSS and HTML * Based on dabblet (http://dabblet.com) * @author Lea Verou */ code[class*="language-"], pre[class*="language-"] { 	color: black; 	background: none; 	text-shadow: 0 1px white; 	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace; 	font-size: 1em; 	text-align: left; 	white-space: pre; 	word-spacing: normal; 	word-break: normal; 	word-wrap: normal; 	line-height: 1.5; 	-moz-tab-size: 4; 	-o-tab-size: 4; 	tab-size: 4; 	-webkit-hyphens: none; 	-moz-hyphens: none; 	-ms-hyphens: none; 	hyphens: none; } pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection, code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection { 	text-shadow: none; 	background: #b3d4fc; } pre[class*="language-"]::selection, pre[class*="language-"] ::selection, code[class*="language-"]::selection, code[class*="language-"] ::selection { 	text-shadow: none; 	background: #b3d4fc; } @media print { 	code[class*="language-"], 	pre[class*="language-"] { 		text-shadow: none; 	} } /* Code blocks */ pre[class*="language-"] { 	padding: 1em; 	margin: .5em 0; 	overflow: auto; } :not(pre) > code[class*="language-"], pre[class*="language-"] { 	background: #f5f2f0; } /* Inline code */ :not(pre) > code[class*="language-"] { 	padding: .1em; 	border-radius: .3em; 	white-space: normal; } .token.comment, .token.prolog, .token.doctype, .token.cdata { 	color: slategray; } .token.punctuation { 	color: #999; } .token.namespace { 	opacity: .7; } .token.property, .token.tag, .token.boolean, .token.number, .token.constant, .token.symbol, .token.deleted { 	color: #905; } .token.selector, .token.attr-name, .token.string, .token.char, .token.builtin, .token.inserted { 	color: #690; } .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string { 	color: #9a6e3a; 	/* This background color was intended by the author of this theme. */ 	background: hsla(0, 0%, 100%, .5); } .token.atrule, .token.attr-value, .token.keyword { 	color: #07a; } .token.function, .token.class-name { 	color: #DD4A68; } .token.regex, .token.important, .token.variable { 	color: #e90; } .token.important, .token.bold { 	font-weight: bold; } .token.italic { 	font-style: italic; } .token.entity { 	cursor: help; }</style>
+<style>:root{color:#333;font-family:Cambria,"Palatino Linotype",Palatino,"Liberation Serif",serif;font-size:15px;line-height:1.5;--mono-font-size: 13px;--indent: 1rem;--list-indent: 1.5rem;--dfn-indent: 0rem}@media (min-width: 720px){:root{font-size:17px;--mono-font-size: 15px;--indent: 2rem;--list-indent: 2rem;--dfn-indent: 2rem}}body{margin:3rem 0 3rem}article{margin:0 1rem}@media (min-width: 720px){body{margin:6rem auto 3rem;max-width:800px;padding-left:75px;padding-right:clamp(0px,calc((100vw - 800px) * .25),75px)}}.source-link{display:none}@media screen and (min-width: 720px){.source-link{display:block;position:absolute;width:18px;fill:#ccc;opacity:.3}.source-link:hover{opacity:1}}.outdated-selection-link,.selection-link{position:absolute;display:block;color:#fff;--selection-background-color: #cacee0;background:var(--selection-background-color);border-radius:4px;font-size:36px;height:23px;line-height:48px;text-align:center;text-decoration:none;width:25px;user-select:none;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none}.outdated-selection-link:hover,.selection-link:hover{text-decoration:none}.outdated-selection-link:before,.selection-link:before{border:5px solid transparent;content:"";height:0;margin-top:-5px;margin-right:-5px;position:absolute;right:1px;top:50%;width:0}@media (max-width: 719px){.outdated-selection-link:before,.selection-link:before{border-bottom-color:var(--selection-background-color);border-top:0;right:50%;top:1px}}@media (min-width: 720px){.outdated-selection-link:before,.selection-link:before{border-left-color:var(--selection-background-color);border-right:0;right:1px;top:50%}}.selection-link:hover{--selection-background-color: #3b5998}.outdated-selection-link{--selection-background-color: #f0babe;font-size:21px;font-weight:800;line-height:27px}.outdated-selection-link:hover:after{content:"This selection content has changed since this link was created.";font:9pt/11pt Cambria,"Palatino Linotype",Palatino,"Liberation Serif",serif;position:absolute;display:block;white-space:nowrap;padding:2px 5px 1px;top:-20px;background:black;color:#fff}a{color:#3b5998;text-decoration:none}a:hover{text-decoration:underline}img{max-width:100%}dl{margin:1rem 0 1rem var(--dfn-indent)}dd{margin:.25em 0 .5em var(--indent)}dd+dd{margin-top:1rem}dfn,.spec-ref{font-style:italic}dfn>a,.spec-ref>a{color:inherit}h1,h2,h3,h4,h5,h6{font-weight:bold;margin:3em 0 1em;position:relative}@media (min-width: 720px){header>h1{margin:6em 0 3em}}h1{font-size:1.5em;margin-top:5em}h2,h3{font-size:1.25em}h4,h5,h6{font-size:1em}section{padding-top:1rem;margin-top:-1rem}section.subsec>h6{margin-top:2em}section.subsec>h6>a{color:#333}section .spec-secid{margin-right:1ex}@media (min-width: 720px){section .spec-secid{position:absolute;right:100%;text-align:right;white-space:nowrap}}footer{font-size:75%;opacity:.5;text-align:center;margin-top:12rem}.spec-toc{margin:1rem 0 3rem}.spec-toc .title{content:"Contents";display:block;font-weight:bold;margin:5em 0 1em}.spec-toc .spec-secid{margin-right:1ex}.spec-toc ol{list-style:none;padding-left:0;margin-top:0;margin-bottom:0}.spec-toc ol ol{list-style:none;padding-left:2ex;margin-bottom:.25em}.spec-toc li{position:relative;padding:5px 0 0 30px;margin:-5px 0 0 -30px}.spec-toc a{color:#333}.spec-toc a:hover{text-decoration:none}.spec-toc a .spec-secid{color:#3b5998}.spec-toc a:hover .spec-secid{text-decoration:underline}.spec-toc .toggle{display:none}.spec-toc .toggle+label{cursor:pointer;left:6px;opacity:1;padding:5px 6px 5px 7px;position:absolute;top:6px;transform:rotate(0deg);transition:all .18s ease-in-out}.spec-toc .toggle+label:after{border-color:transparent transparent transparent #bbc;border-style:solid;border-width:6px 0 6px 7px;content:" ";display:block;height:0;width:0}@media (pointer: fine){.spec-toc .toggle+label{left:10px;padding:3px 5px 3px 6px;top:8px}}.spec-toc .toggle:checked+label{transform:rotate(90deg)}@media (hover: hover){.spec-toc li:not(:hover)>.toggle:checked+label{opacity:0}}.spec-toc .toggle:not(:checked)~ol{max-height:0;overflow:hidden;margin:0}.spec-sidebar-toggle{display:none}.spec-sidebar-toggle+label>.spec-sidebar-button{position:fixed;right:0;top:0;padding:10px 15px;font-size:30px;color:#000000b3;z-index:2;cursor:pointer;user-select:none;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none}.spec-sidebar-toggle:checked+label:after{content:"";position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0}.spec-sidebar{display:none;position:fixed;right:0;top:0;width:min(320px,calc(100vw - 48px));font-size:14px;line-height:1.75;overflow-y:scroll;height:100%;padding:0 0 5rem 30px;box-sizing:border-box;background:#f0f0f0;box-shadow:inset 1px 0 rgba(0,0,0,.05),-4px 0 8px -2px rgba(0,0,0,.04);overscroll-behavior:contain}.spec-sidebar{user-select:none;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none}.spec-sidebar-toggle:checked~.spec-sidebar{display:block}.spec-sidebar .viewing>a:after{color:#8b9;content:"\2022";margin-left:1ex}@media (min-width: 1220px){.spec-sidebar-toggle+label{display:none}.spec-sidebar{display:block;box-shadow:inset 1px 0 rgba(0,0,0,.05),inset 4px 0 8px -2px rgba(0,0,0,.08)!important}body{padding-right:345px}}.spec-note{background:#FEFEF3;border-left:solid 4px #F4E925;margin:1rem -1rem;min-width:70vw;padding:8px 1rem 12px calc(1rem - 4px);width:-moz-fit-content;width:-webkit-fit-content;width:fit-content}@media (min-width: 720px){.spec-note{min-width:416px}}.spec-note>a:first-child{color:#6c6613;display:block;font:italic 11pt/18pt Cambria,"Palatino Linotype",Palatino,"Liberation Serif",serif;opacity:.6;user-select:none}.spec-todo{color:#666;margin:1em 0 1em 5em;min-height:1em}.spec-todo::before{content:"todo";display:block;float:left;margin-left:-5em;text-transform:uppercase}.spec-index ol{list-style-type:none;margin:0 0 0 var(--indent);padding:0;column-width:210px;column-gap:var(--indent)}.spec-index ol li{width:min-content;white-space:nowrap}pre,code{font-family:Consolas,Monaco,"Andale Mono","Ubuntu Mono",monospace;font-size:var(--mono-font-size);font-weight:inherit}code{background:rgba(0,0,0,.03);margin:-2px -1px;padding:3px 3px;white-space:pre-wrap}pre>code{background:none;font-weight:inherit;margin:0;padding:0;white-space:pre}pre{background:#FAFAFA;border-left:solid 4px #E9E9E9;margin:1rem -1rem;min-width:70vw;padding:12px 1rem 12px calc(1rem - 4px);width:-moz-fit-content;width:-webkit-fit-content;width:fit-content;max-width:calc(100vw - 2rem);overflow-y:scroll}@media (min-width: 720px){pre{min-width:40ch}}.spec-example{background:#FAFAFF;border-left:solid 4px #BBBBFF;padding-top:8px}.spec-counter-example{background:#FFFAFA;border-left:solid 4px #FFBBBB;padding-top:8px}.spec-example>a,.spec-counter-example>a{display:block;font:italic 11pt/18pt Cambria,"Palatino Linotype",Palatino,"Liberation Serif",serif;opacity:.6;user-select:none}.spec-counter-example>a{color:#98593b}table{border-collapse:collapse}th{background-color:#f9f9f9}td,th{border:1px solid #D0D0D0;padding:.4em;vertical-align:baseline}ol,ul{padding-left:var(--list-indent)}li>ol,li>ul{margin-top:.25em;margin-bottom:.5em}li+li{margin-top:.25em}li.task{list-style-type:none;position:relative}li.task>input:first-child{margin-left:0;position:absolute;transform:translateX(calc(-100% - 1ch))}ins{background-color:#00c81e14;text-decoration:none}del{background-color:#c8000014}.spec-added,.spec-removed{border-left:4px solid;margin-left:-18px;padding-left:14px}.spec-added{border-color:#396}.spec-removed{border-color:#933;text-decoration:line-through}.spec-keyword{font-weight:bold}.spec-string{font-family:Consolas,Monaco,monospace;font-size:85%;white-space:pre}var{font-style:italic}*[data-name]{transition:.15s background ease-out;border-radius:2px;padding:0 3px;margin:0 -3px}.spec-semantic,.spec-algo{margin:1rem 0 1rem var(--dfn-indent)}.spec-semantic>.spec-nt::after,.spec-algo>.spec-call:first-child::after{content:":";font-style:normal;font-weight:bold;margin-left:1ex}.spec-semantic ol,.spec-semantic ol ol ol ol,.spec-algo ol,.spec-algo ol ol ol ol{list-style-type:decimal}.spec-semantic ol ol,.spec-semantic ol ol ol ol ol,.spec-algo ol ol,.spec-algo ol ol ol ol ol{list-style-type:lower-alpha}.spec-semantic ol ol ol,.spec-semantic ol ol ol ol ol ol,.spec-algo ol ol ol,.spec-algo ol ol ol ol ol ol{list-style-type:lower-roman}.spec-call>a{color:inherit}.spec-production{margin:1rem 0 1rem var(--dfn-indent)}.spec-production>.spec-nt::after{content:":";font-style:normal;font-weight:bold;margin:0 1ex}.spec-semantic.d2>.spec-nt::after,.spec-production.d2>.spec-nt::after{content:"::"}.spec-semantic.d3>.spec-nt::after,.spec-production.d3>.spec-nt::after{content:":::"}.spec-production>.spec-rhs{line-height:1.1;margin:.25em 0 .5em calc(2 * var(--indent));text-indent:calc(-1 * var(--indent))}.spec-semantic>.spec-rhs{display:inline-block;text-indent:calc(-1 * var(--indent));margin-left:calc(1ex + var(--indent))}.spec-rhs>*{text-indent:0}.spec-oneof{display:inline}.spec-oneof::before{content:"one of";font-style:normal;font-weight:bold}.spec-oneof-grid{max-width:calc(100vw - 2rem);overflow:scroll;margin:-1ex -1rem;padding:1ex 1rem}.spec-oneof-grid>table{margin-left:var(--indent)}.spec-oneof .spec-rhs{border:none;margin:0;padding:0 0 0 1rem;vertical-align:baseline;white-space:pre}.spec-oneof .spec-rhs:first-child{padding:0}.spec-rhs .spec-constrained:not(:first-child),.spec-rhs .spec-quantified:not(:first-child),.spec-rhs .spec-nt:not(:first-child),.spec-rhs .spec-t:not(:first-child),.spec-rhs .spec-rx:not(:first-child),.spec-rhs .spec-prose:not(:first-child),.spec-rhs .spec-empty:not(:first-child),.spec-rhs .spec-lookahead:not(:first-child){margin-left:1ex;display:inline-block}.spec-condition{font-size:85%}.spec-condition::before{content:"[if "}.spec-condition.not::before{content:"[if not "}.spec-condition::after{content:"]"}.spec-empty,.spec-prose{color:#666}.spec-nt{font-style:italic}.spec-nt>a{color:inherit}.spec-quantifiers,.spec-params{font-size:65%;font-style:normal;vertical-align:sub}.spec-quantifier.list{color:#3348d3}.spec-quantifier.optional{color:#83238e}.spec-params,.spec-condition{color:#1c7758}.spec-params::before{content:"["}.spec-params::after{content:"]"}.spec-quantifier:not(:last-child)::after,.spec-param:not(:last-child)::after{color:#666;content:", "}.spec-param.conditional::before{content:"?"}.spec-param.negated::before{content:"!"}.spec-t,.spec-rx{color:#333;font-family:monospace;font-weight:bold}.spec-butnot::before{color:#666;content:"but not";font-family:Cambria,"Palatino Linotype",Palatino,"Liberation Serif",serif;font-weight:normal;margin-right:1ex}.spec-butnot>*:not(:first-child)::before{color:#666;content:"or";font-family:Cambria,"Palatino Linotype",Palatino,"Liberation Serif",serif;font-weight:normal;margin-right:1ex}.spec-rhs .spec-oneof::before,.spec-rhs .spec-butnot::before{margin-left:1ex}.spec-lookahead>*{margin:0!important}.spec-lookahead>*:not(:first-child)::before{color:#666;content:", ";font-family:Cambria,"Palatino Linotype",Palatino,"Liberation Serif",serif;font-style:normal;font-weight:normal}.spec-lookahead::before{color:#666;content:"[lookahead = ";font-family:Cambria,"Palatino Linotype",Palatino,"Liberation Serif",serif;font-style:normal;font-weight:normal}.spec-lookahead.not::before{content:"[lookahead \2260  "}.spec-lookahead.set::before{content:"[lookahead \2208  {";margin-right:0}.spec-lookahead.set.not::before{content:"[lookahead \2209  {"}.spec-lookahead.ntset::before{content:"[lookahead \2208  ";margin-right:0}.spec-lookahead.ntset.not::before{content:"[lookahead \2209  "}.spec-lookahead::after{color:#666;content:"]"}.spec-lookahead.set::after{content:"}]"}.token.atrule,.token.attr-value,.token.keyword,.token.property,.token.selector,.token.attr-name,.token.builtin,.token.entity,.token.url,.token.inserted{color:#1b1994b0;background:none}.token.tag,.token.boolean,.token.number,.token.string,.token.char,.token.constant,.token.symbol,.token.regex,.token.important,.token.variable,.token.function,.token.class-name,.token.deleted{color:#a20764bd}.token.comment,.token.prolog,.token.doctype,.token.cdata,.token.description{color:inherit;opacity:.3}.token.punctuation{color:inherit;opacity:.5}.token.operator,.token.namespace{color:inherit;opacity:.7}</style>
+<script>(function(){var r,a=[];document.addEventListener("readystatechange",function(){document.readyState==="interactive"&&u()});function u(){var n=document.querySelector('label[for="spec-sidebar-toggle"]');n.addEventListener("scroll",o),n.addEventListener("touchmove",o);function o(d){d.preventDefault()}for(var t=document.getElementsByTagName("section"),e=0;e<t.length;e++)t[e].getAttribute("secid")&&a.push(t[e]);var i=window.scrollY,c=!1;window.addEventListener("scroll",function(d){i=window.scrollY,c||(c=!0,window.requestAnimationFrame(function(){s(i),c=!1}))})}function s(n){for(var o=n+document.documentElement.clientHeight/4,t,e=a.length-1;e>=0;e--)if(a[e].offsetTop<o){t=a[e];break}var i=t&&t.getAttribute("secid");i!==r&&(r&&l(r,!1),i&&l(i,!0),r=i)}function l(n,o){document.getElementById("_sidebar_"+n).className=o?"viewing":"";for(var t=n.split(".");t.length;){var e=document.getElementById("_toggle_"+t.join("."));e&&(e.checked=o),t.pop()}}s(window.scrollY);})();</script>
+<script>(function(){var n=document.getElementsByTagName("style")[0].sheet,e;function u(){e&&(n.deleteRule(e),e=void 0)}function d(t){u(),e=n.insertRule('*[data-name="'+t+'"] { background: rgba(230,215,0,0.12); }',n.cssRules.length)}document.documentElement.addEventListener("mouseover",function(t){var a=t.target.attributes["data-name"];a&&d(a.value)});document.documentElement.addEventListener("mouseout",u);})();</script>
+<script>(function(){var R="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_",o,p,r,g;document.addEventListener("selectionchange",E);window.addEventListener("resize",C);window.addEventListener("hashchange",x);window.addEventListener("load",x);function S(n){y(new URL(n.target.href))}function x(){y(window.location)}function y(n){var e=n.hash.match(/^#sel-([A-Za-z0-9-_]+)$/);if(!!e){g=e[1],r=k(g);var t=r.getBoundingClientRect(),d=Math.max(20,Math.floor((window.innerHeight-t.height)*.4));window.scrollTo(0,window.scrollY+t.y-d);var c=document.getSelection();c.empty(),c.addRange(r),C()}}function E(n){var e=document.getSelection();if(e.isCollapsed)o&&(o.parentNode.removeChild(o),o=null);else{var t=e.getRangeAt(0);(!r||t.compareBoundaryPoints(Range.START_TO_START,r)!==0||t.compareBoundaryPoints(Range.END_TO_END,r)!==0)&&(r=t,g=B(r),C())}}function C(){if(!!r){p||(p=document.getElementsByTagName("article")[0]),o||(o=document.createElement("a"),document.body.appendChild(o)),o.href="#sel-"+g,o.onclick=S,o.className=r.isOutdated?"outdated-selection-link":"selection-link",o.innerText=r.isOutdated?"!":"\u201F";var n=window.innerWidth<720,e=r.getBoundingClientRect();if(n)o.style.left=Math.floor(e.x+e.width/2+window.scrollX-13)+"px",o.style.top=Math.floor(e.bottom+window.scrollY+10)+"px";else{var t=p.getBoundingClientRect().x;o.style.left=Math.floor(t+window.scrollX-37)+"px",o.style.top=Math.floor(e.y+window.scrollY-3)+"px"}}}function B(n){var e="",t=N(n.startContainer),d=N(n.endContainer),c=M(t,d);return l(c),l(t.slice(c.length).concat(n.startOffset)),l(d.slice(c.length).concat(n.endOffset)),i(L(n.toString())),e;function i(a){do e+=R[a&31|(a>31?32:0)],a>>=5;while(a>0)}function l(a){i(a.length);for(var h=0;h<a.length;h++)i(a[h])}}function k(n){for(var e=new Array(64),t=0;t<64;t++)e[R.charCodeAt(t)]=t;var d=0,c=m(),i=m(),l=m(),a=w(),h=i.pop(),P=O(c.concat(i)),T=l.pop(),A=O(c.concat(l)),u=document.createRange();return u.setStart(P,h),u.setEnd(A,T),u.isOutdated=a!==void 0&&a!==L(u.toString()),u;function w(){for(var s=0,v=0;d<n.length;){var f=e[n.charCodeAt(d++)];if(s|=(f&31)<<v,v+=5,f<32)return s}}function m(){var s=w();if(s!=null){for(var v=new Array(s),f=0;f<s;f++)v[f]=w();return v}}}function N(n){for(var e=[];n!=document.body;){var t=n.parentNode;e.push(Array.prototype.indexOf.call(t.childNodes,n)),n=t}return e.reverse()}function O(n){for(var e=document.body,t=0;t<n.length&&e;t++)e=e.childNodes[n[t]];return e}function M(n,e){for(var t=0;t<n.length&&t<e.length&&n[t]===e[t];)t++;return n.slice(0,t)}function L(n){for(var e=2166136261,t=0;t<n.length;++t)e^=n.charCodeAt(t),e+=(e<<1)+(e<<4)+(e<<7)+(e<<8)+(e<<24);return(e>>15^e)&32767}})();</script>
+</head>
+<body><article>
+<header>
+<h1>Imp Language Specification</h1>
+<section id="intro">
+<p>Imp is a general-purpose programming language originally implemented as a compiler for the Java Virtual Machine.</p>
+<p>This is the official specification for the Imp programming language. It specifies</p>
+<ul>
+<li>the representation of Imp programs</li>
+<li>the syntax of the Imp language</li>
+<li>the semantics for executing Imp programs</li>
+</ul>
+<p>This standard does not specify</p>
+<ul>
+<li>the method by which Imp programs are compiled</li>
+<li>the target platform to which Imp programs are compiled to</li>
+<li>the algorithms used for compilation</li>
+</ul>
+</section>
+<nav class="spec-toc">
+<div class="title">Contents</div>
+<ol>
+<li><a href="#sec-Notation"><span class="spec-secid">1</span>Notation</a></li>
+<li><a href="#sec-Lexical-Elements"><span class="spec-secid">2</span>Lexical Elements</a><ol>
+<li><a href="#sec-Comments"><span class="spec-secid">2.1</span>Comments</a></li>
+<li><a href="#sec-Identifiers"><span class="spec-secid">2.2</span>Identifiers</a></li>
+<li><a href="#sec-Keywords"><span class="spec-secid">2.3</span>Keywords</a></li>
+<li><a href="#sec-Operators"><span class="spec-secid">2.4</span>Operators</a></li>
+<li><a href="#sec-Literals"><span class="spec-secid">2.5</span>Literals</a><ol>
+<li><a href="#sec-Boolean-Literals"><span class="spec-secid">2.5.1</span>Boolean Literals</a></li>
+<li><a href="#sec-Integer-Literals"><span class="spec-secid">2.5.2</span>Integer Literals</a></li>
+<li><a href="#sec-Floating-Point-Literals"><span class="spec-secid">2.5.3</span>Floating Point Literals</a></li>
+<li><a href="#sec-String-Literals"><span class="spec-secid">2.5.4</span>String Literals</a></li>
+<li><a href="#sec-List-Literals"><span class="spec-secid">2.5.5</span>List Literals</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href="#sec-Blocks"><span class="spec-secid">3</span>Blocks</a></li>
+<li><a href="#sec-Scope"><span class="spec-secid">4</span>Scope</a></li>
+<li><a href="#sec-Statements"><span class="spec-secid">5</span>Statements</a><ol>
+<li><a href="#sec-Function-statements"><span class="spec-secid">5.1</span>Function statements</a><ol>
+<li><a href="#sec-Named-functions"><span class="spec-secid">5.1.1</span>Named functions</a></li>
+<li><a href="#sec-Anonymous-lambda-functions"><span class="spec-secid">5.1.2</span>Anonymous (lambda) functions</a></li>
+</ol>
+</li>
+<li><a href="#sec-Return-statements"><span class="spec-secid">5.2</span>Return statements</a></li>
+<li><a href="#sec-If-statement"><span class="spec-secid">5.3</span>If statement</a></li>
+</ol>
+</li>
+<li><a href="#sec-Semantics"><span class="spec-secid">6</span>Semantics</a><ol>
+<li><a href="#sec-Function-Signatures"><span class="spec-secid">6.1</span>Function Signatures</a></li>
+</ol>
+</li>
+<li><a href="#sec-Definitions"><span class="spec-secid">7</span>Definitions</a></li>
+</ol>
+</nav>
+</header>
+<section id="sec-Notation" secid="1">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec-Notation">1</a></span>Notation</h1>
+<p>The syntax is specified using ANTLR <code>.g4</code> syntax.</p>
+</section>
+<section id="sec-Lexical-Elements" secid="2">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec-Lexical-Elements">2</a></span>Lexical Elements</h1>
+<section id="sec-Comments" secid="2.1">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Comments">2.1</a></span>Comments</h2>
+<p>There are three forms of comments in an Imp program:</p>
+<ul>
+<li><em>Line comments</em> start with <code>//</code> and stop and the end of the line</li>
+<li><em>Multiline comments</em> start with <code>/*</code> and end with the first <code>*/</code> encountered.</li>
+<li><em>Doc comments</em> start with <code>/**</code> and end with the first <code>*/</code> encountered. For more information on documentation comments, see the <a href="TODO">TODO</a> section.</li>
+</ul>
+</section>
+<section id="sec-Identifiers" secid="2.2">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Identifiers">2.2</a></span>Identifiers</h2>
+<p>Identifiers name entities such as variables, functions, and classes.</p>
+</section>
+<section id="sec-Keywords" secid="2.3">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Keywords">2.3</a></span>Keywords</h2>
+<p>These words are reserved for language constructs and may not be used as identifiers.</p>
+<ul>
+<li><code>loop</code></li>
+<li><code>if</code></li>
+<li><code>else</code></li>
+<li><code>function</code></li>
+<li><code>return</code></li>
+<li><code>val</code></li>
+<li><code>mut</code></li>
+<li><code>bool</code></li>
+<li><code>int</code></li>
+<li><code>char</code></li>
+<li><code>string</code></li>
+<li><code>export</code></li>
+<li><code>import</code></li>
+<li><code>from</code></li>
+<li><code>as</code></li>
+<li><code>new</code></li>
+<li><code>class</code></li>
+<li><code>interface</code></li>
+<li><code>enum</code></li>
+<li><code>public</code></li>
+<li><code>in</code></li>
+</ul>
+</section>
+<section id="sec-Operators" secid="2.4">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Operators">2.4</a></span>Operators</h2>
+<p>These sequences represent operators and punctuation</p>
+<ul>
+<li>TODO</li>
+</ul>
+</section>
+<section id="sec-Literals" secid="2.5">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Literals">2.5</a></span>Literals</h2>
+<p>In an Imp program, primitive data types can be represented in a concise manner.</p>
+<section id="sec-Boolean-Literals" secid="2.5.1">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec-Boolean-Literals">2.5.1</a></span>Boolean Literals</h3>
+<p>Simply using the reserved keywords <code>true</code> or <code>false</code> defines a boolean value.</p>
+</section>
+<section id="sec-Integer-Literals" secid="2.5.2">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec-Integer-Literals">2.5.2</a></span>Integer Literals</h3>
+<p>Base 10 integer literals are represented by the following ANTLR grammar:</p>
+<pre data-language="g4"><code> <span class="token punctuation">(</span><span class="token character-class regex"><span class="token punctuation">[</span>1<span class="token range punctuation">-</span>9<span class="token punctuation">]</span></span> <span class="token character-class regex"><span class="token punctuation">[</span>0<span class="token range punctuation">-</span>9<span class="token punctuation">]</span></span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token string">'0'</span><span class="token punctuation">;</span>
+</code></pre>
+<p>Essentially, any number that does not start with 0, or 0. Below are examples of valid integers.</p>
+<pre data-language="c"><code>int_lit_number <span class="token operator">=</span> <span class="token number">123457</span>
+int_lit_1 <span class="token operator">=</span> <span class="token number">1</span>
+int_lit_0 <span class="token operator">=</span> <span class="token number">0</span>
+</code></pre>
+<p>Examples of invalid base 10 integer literals:</p>
+<pre data-language="c"><code>int_invalid_leading_0 <span class="token operator">=</span> <span class="token number">01013</span>
+int_invalid_all_0s <span class="token operator">=</span> <span class="token number">00000</span>
+</code></pre>
+</section>
+<section id="sec-Floating-Point-Literals" secid="2.5.3">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec-Floating-Point-Literals">2.5.3</a></span>Floating Point Literals</h3>
+<p>As the Imp language was initially implemented for the JVM, we use the Java IEEE floating point specification (a subset of the IEEE 754 standard).</p>
+<p>Floating point variables are represented as decimals with an optional scientific notation exponent.</p>
+<pre data-language="c"><code>float_lit_pi <span class="token operator">=</span> <span class="token number">3.14159265</span>
+float_lit_plank <span class="token operator">=</span> <span class="token number">6.62607015e-34</span>
+</code></pre>
+</section>
+<section id="sec-String-Literals" secid="2.5.4">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec-String-Literals">2.5.4</a></span>String Literals</h3>
+<div class="spec-todo">
+</div>
+</section>
+<section id="sec-List-Literals" secid="2.5.5">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec-List-Literals">2.5.5</a></span>List Literals</h3>
+<div class="spec-todo">
+</div>
+</section>
+</section>
+</section>
+<section id="sec-Blocks" secid="3">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec-Blocks">3</a></span>Blocks</h1>
+<p>A block is a possibly empty sequence of statements within matching braces. Note that the upper level of an Imp program is not wrapped in matching braces, but still behaves as a block.</p>
+<pre data-language="g4"><code><span class="token definition rule class-name">block</span> <span class="token punctuation">:</span> <span class="token constant">LBRACE</span> statementList<span class="token operator">?</span> <span class="token constant">RBRACE</span>
+</code></pre>
+<p>Blocks influence scoping.</p>
+</section>
+<section id="sec-Scope" secid="4">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec-Scope">4</a></span>Scope</h1>
+<div class="spec-todo">
+</div>
+</section>
+<section id="sec-Statements" secid="5">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec-Statements">5</a></span>Statements</h1>
+<p>Statements control execution of an Imp program.</p>
+<pre data-language="g4"><code><span class="token definition rule class-name">statement</span>
+    <span class="token punctuation">:</span> block
+    <span class="token operator">|</span> functionStatement
+    <span class="token operator">|</span> classStatement
+    <span class="token operator">|</span> returnStatement
+    <span class="token operator">|</span> ifStatement
+    <span class="token operator">|</span> loopStatement
+    <span class="token operator">|</span> expression
+    <span class="token operator">|</span> variableStatement
+    <span class="token operator">|</span> assignment
+    <span class="token operator">|</span> importStatement
+    <span class="token operator">|</span> exportStatement
+    <span class="token punctuation">;</span>
+</code></pre>
+<section id="sec-Function-statements" secid="5.1">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Function-statements">5.1</a></span>Function statements</h2>
+<p>A function declaration binds an indentifier, the function name, to a block of statements. Functions exist only in the current scope unless exported.</p>
+<pre data-language="g4"><code><span class="token definition rule class-name">functionStatement</span>
+    <span class="token punctuation">:</span> <span class="token constant">FUNCTION</span> identifier <span class="token constant">LPAREN</span> <span class="token punctuation">(</span>arguments<span class="token punctuation">)</span><span class="token operator">?</span> <span class="token constant">RPAREN</span> <span class="token punctuation">(</span>type<span class="token punctuation">)</span><span class="token operator">?</span> block
+    <span class="token operator">|</span> <span class="token constant">LPAREN</span> <span class="token punctuation">(</span>arguments<span class="token punctuation">)</span><span class="token operator">?</span> <span class="token constant">RPAREN</span> <span class="token constant">FATARROW</span> block
+    <span class="token punctuation">;</span>
+</code></pre>
+<section id="sec-Named-functions" secid="5.1.1">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec-Named-functions">5.1.1</a></span>Named functions</h3>
+<p>Functions are defined as follows:</p>
+<pre data-language="imp"><code>function sum(x int, y int) int {
+    return x + y
+}
+
+</code></pre>
+<p>Each named function posesses a <a href="todo">Function Signature</a>, consisting of the function identifier, owner, return type, and argument types.</p>
+</section>
+<section id="sec-Anonymous-lambda-functions" secid="5.1.2">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec-Anonymous-lambda-functions">5.1.2</a></span>Anonymous (lambda) functions</h3>
+<div class="spec-todo">
+.</div>
+</section>
+</section>
+<section id="sec-Return-statements" secid="5.2">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Return-statements">5.2</a></span>Return statements</h2>
+<p>Return statements terminate execution of the current function, optionally providing a result value.</p>
+<pre data-language="g4"><code><span class="token definition rule class-name">returnStatement</span>
+    <span class="token punctuation">:</span> <span class="token constant">RETURN</span> <span class="token punctuation">(</span>expression<span class="token punctuation">)</span><span class="token operator">?</span>
+    <span class="token punctuation">;</span>
+</code></pre>
+<p>Functions do not need an explicit return statement, but an empty return statement will be added by the compiler at the end of a function missing an explicit return. Unlike some languages (Ruby), the last expression is not returned by default.</p>
+<p>The type of the expression returned by any return statements in the function must match any declared type of the function signature.</p>
+</section>
+<section id="sec-If-statement" secid="5.3">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-If-statement">5.3</a></span>If statement</h2>
+<p>Conditional execution of two branches. Todo: add lisp-style switch/cond</p>
+</section>
+</section>
+<section id="sec-Semantics" secid="6">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec-Semantics">6</a></span>Semantics</h1>
+<section id="sec-Function-Signatures" secid="6.1">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Function-Signatures">6.1</a></span>Function Signatures</h2>
+<div class="spec-todo">
+</div>
+</section>
+</section>
+<section id="sec-Definitions" secid="7">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec-Definitions">7</a></span>Definitions</h1>
+<p>Definitions that may be useful while reading this spec. </p>
+</section>
+</article>
+<footer>
+Written in <a href="https://spec-md.com" target="_blank">Spec Markdown</a>.</footer>
+<input hidden class="spec-sidebar-toggle" type="checkbox" id="spec-sidebar-toggle" aria-hidden /><label for="spec-sidebar-toggle" aria-hidden><div class="spec-sidebar-button">&#x2630;</div></label>
+<div class="spec-sidebar" aria-hidden>
+<div class="spec-toc">
+<div class="title"><a href="#">Imp Language Specification</a></div>
+<ol><li id="_sidebar_1"><a href="#sec-Notation"><span class="spec-secid">1</span>Notation</a></li>
+<li id="_sidebar_2"><a href="#sec-Lexical-Elements"><span class="spec-secid">2</span>Lexical Elements</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_2" /><label for="_toggle_2"></label>
+<ol>
+<li id="_sidebar_2.1"><a href="#sec-Comments"><span class="spec-secid">2.1</span>Comments</a></li>
+<li id="_sidebar_2.2"><a href="#sec-Identifiers"><span class="spec-secid">2.2</span>Identifiers</a></li>
+<li id="_sidebar_2.3"><a href="#sec-Keywords"><span class="spec-secid">2.3</span>Keywords</a></li>
+<li id="_sidebar_2.4"><a href="#sec-Operators"><span class="spec-secid">2.4</span>Operators</a></li>
+<li id="_sidebar_2.5"><a href="#sec-Literals"><span class="spec-secid">2.5</span>Literals</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_2.5" /><label for="_toggle_2.5"></label>
+<ol>
+<li id="_sidebar_2.5.1"><a href="#sec-Boolean-Literals"><span class="spec-secid">2.5.1</span>Boolean Literals</a></li>
+<li id="_sidebar_2.5.2"><a href="#sec-Integer-Literals"><span class="spec-secid">2.5.2</span>Integer Literals</a></li>
+<li id="_sidebar_2.5.3"><a href="#sec-Floating-Point-Literals"><span class="spec-secid">2.5.3</span>Floating Point Literals</a></li>
+<li id="_sidebar_2.5.4"><a href="#sec-String-Literals"><span class="spec-secid">2.5.4</span>String Literals</a></li>
+<li id="_sidebar_2.5.5"><a href="#sec-List-Literals"><span class="spec-secid">2.5.5</span>List Literals</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li id="_sidebar_3"><a href="#sec-Blocks"><span class="spec-secid">3</span>Blocks</a></li>
+<li id="_sidebar_4"><a href="#sec-Scope"><span class="spec-secid">4</span>Scope</a></li>
+<li id="_sidebar_5"><a href="#sec-Statements"><span class="spec-secid">5</span>Statements</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_5" /><label for="_toggle_5"></label>
+<ol>
+<li id="_sidebar_5.1"><a href="#sec-Function-statements"><span class="spec-secid">5.1</span>Function statements</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_5.1" /><label for="_toggle_5.1"></label>
+<ol>
+<li id="_sidebar_5.1.1"><a href="#sec-Named-functions"><span class="spec-secid">5.1.1</span>Named functions</a></li>
+<li id="_sidebar_5.1.2"><a href="#sec-Anonymous-lambda-functions"><span class="spec-secid">5.1.2</span>Anonymous (lambda) functions</a></li>
+</ol>
+</li>
+<li id="_sidebar_5.2"><a href="#sec-Return-statements"><span class="spec-secid">5.2</span>Return statements</a></li>
+<li id="_sidebar_5.3"><a href="#sec-If-statement"><span class="spec-secid">5.3</span>If statement</a></li>
+</ol>
+</li>
+<li id="_sidebar_6"><a href="#sec-Semantics"><span class="spec-secid">6</span>Semantics</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_6" /><label for="_toggle_6"></label>
+<ol>
+<li id="_sidebar_6.1"><a href="#sec-Function-Signatures"><span class="spec-secid">6.1</span>Function Signatures</a></li>
+</ol>
+</li>
+<li id="_sidebar_7"><a href="#sec-Definitions"><span class="spec-secid">7</span>Definitions</a></li>
+</ol>
+</div>
+</div>
+</body>
+</html>

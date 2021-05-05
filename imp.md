@@ -155,10 +155,64 @@ statement
     ;
 ```
 
+## Function statements
+
+A function declaration binds an indentifier, the function name, to a block of statements. Functions exist only in the current scope unless exported.
+
+```g4
+functionStatement
+    : FUNCTION identifier LPAREN (arguments)? RPAREN (type)? block
+    | LPAREN (arguments)? RPAREN FATARROW block
+    ;
+```
+### Named functions
+
+Functions are defined as follows:
+
+```imp
+function sum(x int, y int) int {
+    return x + y
+}
+
+```
+
+Each named function posesses a [Function Signature](todo), consisting of the function identifier, owner, return type, and argument types.
+
+### Anonymous (lambda) functions
+
+Todo.
 
 
 
 
+
+
+
+
+## Return statements
+
+Return statements terminate execution of the current function, optionally providing a result value.
+
+```g4
+returnStatement
+    : RETURN (expression)?
+    ;
+```
+
+Functions do not need an explicit return statement, but an empty return statement will be added by the compiler at the end of a function missing an explicit return. Unlike some languages (Ruby), the last expression is not returned by default.
+
+The type of the expression returned by any return statements in the function must match any declared type of the function signature.
+
+## If statement
+
+Conditional execution of two branches.
+Todo: add lisp-style switch/cond
+
+# Semantics
+
+## Function Signatures
+
+Todo
 
 
 
