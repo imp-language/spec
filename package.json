@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "spec-md ./imp.md > ./build/imp.html",
-    "serve": "nodemon --exec \"spec-md > ./docs/imp.html\" ./imp.md"
+    "build": "spec-md ./imp.md > ./docs/index.html",
+    "serve": "nodemon --exec \"spec-md > ./docs/index.html\" ./imp.md"
   },
   "repository": {
     "type": "git",
